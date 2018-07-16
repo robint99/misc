@@ -50,6 +50,8 @@ class AppletInstaller(object):
         elif vendor == "LinuxMint":
             if release == "18.3":
                 self.distro = "Mint 18.3"
+            elif release == "19":
+                self.distro = "Mint 19"
 
         self.workdir = os.path.expanduser("~/dock_applet/")
 
@@ -65,7 +67,7 @@ class AppletInstaller(object):
                     ""        : we can't do anything for this distro
         """
 
-        if self.distro in ["Ubuntu 16.04", "Ubuntu 17.10", "Ubuntu 18.04"]:
+        if self.distro in ["Ubuntu 16.04", "Ubuntu 17.10", "Ubuntu 18.04", "Mint 19"]:
             return "current"
         elif self.distro == "Mint 18.3":
             return ("V0.80")
@@ -77,7 +79,7 @@ class AppletInstaller(object):
         """
 
       
-        if self.distro == "Ubuntu 18.04":
+        if self.distro in ["Ubuntu 18.04", "Mint 19"]:
             return ["git", "automake", "autoconf", "libglib2.0-dev", "bamfdaemon", "gir1.2-bamf-3",
                     "python-gi-cairo", "python3-pil", "python3-xlib"]
         elif self.distro == "Ubuntu 16.04":
@@ -178,7 +180,7 @@ class AppletInstaller(object):
             Note: the working directory must have been created before calling this ....
         """
             
-        wd = self.workdir + "/mate-dock-applet"
+        wd = self.workdir + "mate-dock-applet"
         if self.get_applet_version() == "current":
             if not os.path.exists(wd):
                 # git clone
